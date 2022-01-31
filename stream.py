@@ -3,6 +3,8 @@ import secrets
 import pyautogui
 from flask import Flask, Response, render_template_string, send_file, request, redirect, url_for, make_response
 
+PASSWORD = "1234"
+
 app = Flask(__name__)
 tokens = []
 
@@ -44,7 +46,7 @@ def index():
 @app.route("/auth", methods=["POST"])
 def auth():
     password = request.form.get("password")
-    if password and password == "1667":
+    if password and password == PASSWORD:
         token = secrets.token_urlsafe(20)
         tokens.append(token)
         resp = make_response(redirect(url_for("main")))
